@@ -31,8 +31,7 @@
 
 use Xmf\Request;
 use Xmf\Module\Admin;
-use XoopsModules\Classroom\{
-    Common\Configurator,
+use XoopsModules\Classroom\{Common\Configurator,
     Common\Migrate,
     Helper
 };
@@ -66,13 +65,13 @@ $configurator = new Configurator();
 
 $migrator = new Migrate($configurator);
 
-$op = Request::getCmd('op', 'show');
-$opShow = Request::getCmd('show', null, 'POST');
+$op        = Request::getCmd('op', 'show');
+$opShow    = Request::getCmd('show', null, 'POST');
 $opMigrate = Request::getCmd('migrate', null, 'POST');
-$opSchema = Request::getCmd('schema', null, 'POST');
-$op = !empty($opShow) ? 'show' : $op;
-$op = !empty($opMigrate) ? 'migrate' : $op;
-$op = !empty($opSchema) ? 'schema' : $op;
+$opSchema  = Request::getCmd('schema', null, 'POST');
+$op        = !empty($opShow) ? 'show' : $op;
+$op        = !empty($opMigrate) ? 'migrate' : $op;
+$op        = !empty($opSchema) ? 'schema' : $op;
 
 $message = '';
 

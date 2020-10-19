@@ -28,11 +28,11 @@ namespace XoopsModules\Classroom\Blocktypes;
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir                                                      //
 
-use XoopsModules\Classroom\{
-    Block,
+use XoopsModules\Classroom\{Block,
     Helper,
     XoopsHeadlineRenderer
 };
+
 /** @var Helper $helper */
 
 /**
@@ -110,7 +110,7 @@ class RssBlock extends Block
         $headlines = $this->getFeeds(true);
         $count     = count($headlines);
         for ($i = 0; $i < $count; $i++) {
-//            require_once XOOPS_ROOT_PATH . '/modules/classroom/class/headlinerenderer.php';
+            //            require_once XOOPS_ROOT_PATH . '/modules/classroom/class/headlinerenderer.php';
             $renderer = new XoopsHeadlineRenderer($headlines[$i]);
             if (!$renderer->renderBlock()) {
                 if (2 == $xoopsConfig['debug_mode']) {
@@ -131,7 +131,7 @@ class RssBlock extends Block
     public function updateBlock()
     {
         $headlineHandler = $helper->getHandler('Headline');
-        $obj   = $headlineHandler->create();
+        $obj             = $headlineHandler->create();
         if (isset($_POST['feedid'])) {
             $obj->setVar('headline_id', (int)$_POST['feedid']);
         }
@@ -155,9 +155,9 @@ class RssBlock extends Block
      */
     public function deleteItem()
     {
-        $id    = (int)$_REQUEST['id'];
+        $id              = (int)$_REQUEST['id'];
         $headlineHandler = $helper->getHandler('Headline');
-        $obj   =& $headlineHandler->get($id);
+        $obj             =& $headlineHandler->get($id);
 
         return $headlineHandler->delete($obj);
     }
@@ -227,7 +227,7 @@ class RssBlock extends Block
      */
     public function getFeeds($visible_only = false)
     {
-        $helper = Helper::getInstance();
+        $helper   = Helper::getInstance();
         $criteria = new \CriteriaCompo(new \Criteria('headline_blockid', $this->getVar('blockid')));
         if (false !== $visible_only) {
             $criteria->add(new \Criteria('headline_display', 1));

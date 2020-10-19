@@ -43,7 +43,7 @@ function cr_search($queryarray, $andor, $limit, $offset, $userid = 0, $storyid =
         $criteria = new \Criteria('owner', (int)$userid);
         $criteria->setLimit($limit);
         $criteria->setStart($offset);
-        $helper = Helper::getInstance();
+        $helper           = Helper::getInstance();
         $classroomHandler = $helper->getHandler('Classroom');
         $classrooms       = $classroomHandler->getObjects($criteria);
         $ret              = [];

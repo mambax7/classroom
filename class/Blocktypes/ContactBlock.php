@@ -28,12 +28,11 @@ namespace XoopsModules\Classroom\Blocktypes;
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir                                                      //
 
-use XoopsModules\Classroom\{
-    Block,
+use XoopsModules\Classroom\{Block,
     Helper
 };
-/** @var Helper $helper */
 
+/** @var Helper $helper */
 
 /**
  * TextfieldBlocktype class
@@ -89,7 +88,7 @@ class ContactBlock extends Block
     {
         global $xoopsUser;
 
-        $helper = Helper::getInstance();
+        $helper           = Helper::getInstance();
         $classroomHandler = $helper->getHandler('Classroom');
         $classroom        = $classroomHandler->get($this->getVar('classroomid'));
         $teacherid        = $classroom->getVar('owner');

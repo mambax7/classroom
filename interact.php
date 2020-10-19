@@ -31,7 +31,7 @@ require __DIR__ . '/header.php';
 
 $blockid = isset($_REQUEST['blockid']) ? (int)$_REQUEST['blockid'] : redirect_header('javascript:history.go(-1);', 2, _CR_ER_NOBLOCKSELECTED);
 require XOOPS_ROOT_PATH . '/header.php';
-$helper = Helper::getInstance();
+$helper       = Helper::getInstance();
 $blockHandler = $helper->getHandler('Block');
 $block        =& $blockHandler->get($blockid);
 $block->interact();

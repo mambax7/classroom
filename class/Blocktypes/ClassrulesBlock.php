@@ -2,12 +2,11 @@
 
 namespace XoopsModules\Classroom\Blocktypes;
 
-use XoopsModules\Classroom\{
-    Block,
+use XoopsModules\Classroom\{Block,
     Helper
 };
-/** @var Helper $helper */
 
+/** @var Helper $helper */
 
 /**
  * LinkBlock class

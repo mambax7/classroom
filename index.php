@@ -25,7 +25,6 @@
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir                                                      //
 
-
 use XoopsModules\Classroom\{Helper
 };
 
@@ -39,7 +38,7 @@ $xoopsOption['itemid']                   = 0;
 
 require __DIR__ . '/header.php';
 
-$helper = Helper::getInstance();
+$helper        = Helper::getInstance();
 $schoolHandler = $helper->getHandler('School');
 
 $xoopsTpl->assign('schools', $schoolHandler->getObjects(null, false));

@@ -96,7 +96,7 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a {@link Classblock} object
      *
-     * @param int|null     $classid
+     * @param int|null  $classid
      * @param bool|null $blockid
      * @return mixed
      * @staticvar object reference to the {@link Classblock} object
@@ -185,8 +185,8 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
     /**
      * get {@link Classblock} objects from criteria
      *
-     * @param \CriteriaElement $criteria   reference to a {@link Criteria} or {@link CriteriaCompo} object
-     * @param bool   $as_object if true, the returned array will be {@link Classblock} objects
+     * @param \CriteriaElement $criteria  reference to a {@link Criteria} or {@link CriteriaCompo} object
+     * @param bool             $as_object if true, the returned array will be {@link Classblock} objects
      *
      * @staticvar array $ret array of {@link Classblock} objects
      *
@@ -196,9 +196,9 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
     public function &getObjects($criteria = null, $id_as_key = false, $as_object = true)
     {
         $helper = Helper::getInstance();
-        $ret   = [];
-        $limit = $start = 0;
-        $sql   = 'SELECT cb.blockid, cb.classid, cb.visible, cb.side, cb.weight, b.blocktypeid, b.classroomid, b.name AS blockname
+        $ret    = [];
+        $limit  = $start = 0;
+        $sql    = 'SELECT cb.blockid, cb.classid, cb.visible, cb.side, cb.weight, b.blocktypeid, b.classroomid, b.name AS blockname
                 FROM ' . $this->table . ' cb,
                      ' . $this->db->prefix('classroom_block') . ' b
                 WHERE cb.blockid=b.blockid';

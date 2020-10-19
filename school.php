@@ -35,9 +35,9 @@ $xoopsOption['permission']               = 'school';
 $xoopsOption['itemid']                   = $school;
 require __DIR__ . '/header.php';
 
-$helper = Helper::getInstance();
-$divisionHandler    = $helper->getHandler('Division');
-$schoolHandler = $helper->getHandler('School');
+$helper          = Helper::getInstance();
+$divisionHandler = $helper->getHandler('Division');
+$schoolHandler   = $helper->getHandler('School');
 
 $school_obj = $schoolHandler->get($school);
 $school_arr = [

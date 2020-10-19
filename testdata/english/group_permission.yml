@@ -1,30 +1,24 @@
--
-    gperm_groupid: '1'
-    gperm_itemid: '2'
-    gperm_modid: '14'
-    gperm_name: classroom
--
-    gperm_groupid: '1'
-    gperm_itemid: '1'
-    gperm_modid: '14'
-    gperm_name: classroom
--
-    gperm_groupid: '1'
-    gperm_itemid: '2'
-    gperm_modid: '14'
-    gperm_name: division
--
-    gperm_groupid: '1'
-    gperm_itemid: '1'
-    gperm_modid: '14'
-    gperm_name: division
--
-    gperm_groupid: '1'
-    gperm_itemid: '2'
-    gperm_modid: '14'
-    gperm_name: school
--
-    gperm_groupid: '1'
-    gperm_itemid: '1'
-    gperm_modid: '14'
-    gperm_name: school
+- gperm_groupid: '1'
+  gperm_itemid: '2'
+  gperm_modid: '14'
+  gperm_name: classroom
+- gperm_groupid: '1'
+  gperm_itemid: '1'
+  gperm_modid: '14'
+  gperm_name: classroom
+- gperm_groupid: '1'
+  gperm_itemid: '2'
+  gperm_modid: '14'
+  gperm_name: division
+- gperm_groupid: '1'
+  gperm_itemid: '1'
+  gperm_modid: '14'
+  gperm_name: division
+- gperm_groupid: '1'
+  gperm_itemid: '2'
+  gperm_modid: '14'
+  gperm_name: school
+- gperm_groupid: '1'
+  gperm_itemid: '1'
+  gperm_modid: '14'
+  gperm_name: school

@@ -32,7 +32,7 @@ $cbform = new \XoopsThemeForm(_CR_MA_CLASSBLOCKFORM, 'classblockform', $_SERVER[
 
 $cbform->addElement(new \XoopsFormText(_CR_MA_BLOCKNAME, 'blockname', 30, 50, $block->getVar('name', 'E')), true);
 
-$helper = Helper::getInstance();
+$helper       = Helper::getInstance();
 $classHandler = $helper->getHandler('ClassroomClass');
 
 $criteria = new \Criteria('classroomid', $block->getVar('classroomid'));

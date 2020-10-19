@@ -76,7 +76,7 @@ class ClassroomBase extends \XoopsObject
      */
     public function getClasses()
     {
-        $helper = Helper::getInstance();
+        $helper       = Helper::getInstance();
         $classHandler = $helper->getHandler('ClassroomClass');
 
         return $classHandler->getObjects(null, true, true);

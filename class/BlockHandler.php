@@ -27,6 +27,7 @@ namespace XoopsModules\Classroom;
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir                                                      //
+
 /**
  * Classes for managing Blocks
  *
@@ -83,8 +84,8 @@ class BlockHandler extends \XoopsPersistableObjectHandler
         global $xoopsModule;
         $blocktypes = $xoopsModule->getInfo('blocktypes');
         //        require_once XOOPS_ROOT_PATH . '/modules/classroom/class/blocktypeloader.php';
-//        $classname      = 'Blocktypes\\' . ucfirst($blocktypes[$blocktypeid]['name']) . 'Block';
-        $classname = __NAMESPACE__ . '\Blocktypes\\' . ucfirst($blocktypes[$blocktypeid]['name']) . 'Block';
+        //        $classname      = 'Blocktypes\\' . ucfirst($blocktypes[$blocktypeid]['name']) . 'Block';
+        $classname      = __NAMESPACE__ . '\Blocktypes\\' . ucfirst($blocktypes[$blocktypeid]['name']) . 'Block';
         $classroomBlock = new $classname();
         if ($isNew) {
             $classroomBlock->setNew();
@@ -127,7 +128,7 @@ class BlockHandler extends \XoopsPersistableObjectHandler
      * @param object $obj reference to the {@link Block} object
      * @return bool
      */
-    public function insert($obj,  $force = true)
+    public function insert($obj, $force = true)
     {
         if (!$obj->isDirty()) {
             return true;

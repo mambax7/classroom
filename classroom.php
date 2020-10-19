@@ -29,12 +29,12 @@ use XoopsModules\Classroom\Helper;
 require __DIR__ . '/header.php';
 $classroom = isset($_GET['cr']) ? (int)$_GET['cr'] : redirect_header('index.php', 2, _CR_ER_NOCLASSROOMSELECTED);
 
-$helper = Helper::getInstance();
+$helper           = Helper::getInstance();
 $classHandler     = $helper->getHandler('ClassroomClass');
 $classroomHandler = $helper->getHandler('Classroom');
 $classHandler     = $helper->getHandler('ClassroomClass');
 $classroomHandler = $helper->getHandler('Classroom');
-$divisionHandler       = $helper->getHandler('Division');
+$divisionHandler  = $helper->getHandler('Division');
 $schoolHandler    = $helper->getHandler('School');
 
 $class_criteria = new \Criteria('classroomid', $classroom);

@@ -63,7 +63,7 @@ class XoopsHeadlineRenderer
      */
     public function updateCache()
     {
-        $helper = Helper::getInstance();
+        $helper             = Helper::getInstance();
         $error_level_stored = error_reporting();
         error_reporting($error_level_stored & ~E_NOTICE);
         // includes Snoopy class for remote file access

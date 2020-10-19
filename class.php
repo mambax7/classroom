@@ -29,7 +29,7 @@ use XoopsModules\Classroom\Helper;
 require __DIR__ . '/header.php';
 $class = isset($_GET['c']) ? (int)$_GET['c'] : redirect_header('index.php', 2, _CR_ER_NOCLASSSELECTED);
 
-$helper = Helper::getInstance();
+$helper            = Helper::getInstance();
 $classblockHandler = $helper->getHandler('Classblock');
 $classHandler      = $helper->getHandler('ClassroomClass');
 $classroomHandler  = $helper->getHandler('Classroom');
@@ -61,9 +61,9 @@ $xoopsTpl->assign('edit_mode', $edit_mode);
 $xoopsTpl->assign('class', ['classid' => $thisclass->getVar('classid'), 'name' => $thisclass->getVar('name'), 'time' => $thisclass->getVar('time'), 'description' => $thisclass->getVar('description')]);
 $xoopsTpl->assign('classroom', $thisclassroom);
 
-$divisionHandler   = $helper->getHandler('Division');
-$div_criteria = new \Criteria('divisionid', $thisclassroom[0]['divisionid']);
-$division     = $divisionHandler->getObjects($div_criteria, false, false);
+$divisionHandler = $helper->getHandler('Division');
+$div_criteria    = new \Criteria('divisionid', $thisclassroom[0]['divisionid']);
+$division        = $divisionHandler->getObjects($div_criteria, false, false);
 $xoopsTpl->assign('division', $division);
 
 $schoolHandler   = $helper->getHandler('School');
@@ -77,9 +77,9 @@ $block_arr = $classblockHandler->getObjects($class_criteria);
 foreach (array_keys($block_arr) as $i) {
     $bcachetime = $block_arr[$i]->block->getVar('bcachetime');
     if (empty($bcachetime)) {
-        $xoopsTpl->caching=0;
+        $xoopsTpl->caching = 0;
     } else {
-        $xoopsTpl->caching=2;
+        $xoopsTpl->caching        = 2;
         $xoopsTpl->cache_lifetime = $bcachetime;
     }
     $btpl = $block_arr[$i]->block->getVar('template');
@@ -117,5 +117,5 @@ foreach (array_keys($block_arr) as $i) {
     unset($bcontent);
 }
 
-$xoopsTpl->caching=0;
+$xoopsTpl->caching = 0;
 require XOOPS_ROOT_PATH . '/footer.php';

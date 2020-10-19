@@ -28,10 +28,10 @@ namespace XoopsModules\Classroom\Blocktypes;
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir                                                      //
 
-use XoopsModules\Classroom\{
-    Block,
+use XoopsModules\Classroom\{Block,
     Helper
 };
+
 /** @var Helper $helper */
 
 /**
@@ -60,12 +60,12 @@ class QuizBlock extends Block
 
         echo $this->showQuestions();
 
-        $helper = Helper::getInstance();
+        $helper          = Helper::getInstance();
         $questionHandler = $helper->getHandler('Question');
         if (isset($_GET['id'])) {
-            $question =&  $questionHandler->get($_GET['id']);
+            $question =& $questionHandler->get($_GET['id']);
         } else {
-            $question =  $questionHandler->create();
+            $question = $questionHandler->create();
         }
 
         $form = new \XoopsThemeForm('', 'quizform', 'manage.php');
@@ -99,12 +99,12 @@ class QuizBlock extends Block
      */
     public function buildBlock()
     {
-        $helper = Helper::getInstance();
+        $helper          = Helper::getInstance();
         $questionHandler = $helper->getHandler('Question');
         //Fetch all questions in this block
         $criteria = new \Criteria('blockid', $this->getVar('blockid'));
         $criteria->setSort('weight');
-        $questions =  $questionHandler->getObjects($criteria);
+        $questions = $questionHandler->getObjects($criteria);
 
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         $form = new \XoopsThemeForm('', 'quizform', 'interact.php');
@@ -160,8 +160,8 @@ class QuizBlock extends Block
     public function updateBlock()
     {
         $questionHandler = $helper->getHandler('Question');
-        $obj      =&  $questionHandler->updateInsert();
-        $errors   = $obj->getErrors();
+        $obj             =& $questionHandler->updateInsert();
+        $errors          = $obj->getErrors();
         if (count($errors) > 0) {
             foreach ($errors as $errorstring) {
                 $this->setErrors($errorstring);
@@ -180,14 +180,14 @@ class QuizBlock extends Block
     public function interact()
     {
         global $xoopsTpl;
-        $helper = Helper::getInstance();
-        $answers  = $_POST['answer'] ?? [];
-        $correct  = 0;
+        $helper          = Helper::getInstance();
+        $answers         = $_POST['answer'] ?? [];
+        $correct         = 0;
         $questionHandler = $helper->getHandler('Question');
         //Fetch all questions in this block
         $criteria = new \Criteria('blockid', $this->getVar('blockid'));
         $criteria->setSort('weight');
-        $questions =  $questionHandler->getObjects($criteria);
+        $questions = $questionHandler->getObjects($criteria);
         if (isset($_POST['showanswers'])) {
             $xoopsTpl->assign('show_answer', 1);
         }
@@ -219,9 +219,9 @@ class QuizBlock extends Block
      */
     public function deleteItem()
     {
-        $id           = (int)$_REQUEST['id'];
-        $questionHandler     = $helper->getHandler('Question');
-        $thisQuestion =& $questionHandler->get($id);
+        $id              = (int)$_REQUEST['id'];
+        $questionHandler = $helper->getHandler('Question');
+        $thisQuestion    =& $questionHandler->get($id);
 
         return $questionHandler->delete($thisQuestion);
     }
@@ -236,9 +236,9 @@ class QuizBlock extends Block
     {
         $questionHandler = $helper->getHandler('Question');
         //Fetch all questions in this block
-        $questions =  $questionHandler->getObjects(new \Criteria('blockid', $this->getVar('blockid')));
+        $questions = $questionHandler->getObjects(new \Criteria('blockid', $this->getVar('blockid')));
 
-        return  $questionHandler->deleteAll(new \Criteria('questionid', '(' . implode(',', array_keys($questions)) . ')', 'IN'));
+        return $questionHandler->deleteAll(new \Criteria('questionid', '(' . implode(',', array_keys($questions)) . ')', 'IN'));
     }
 
     /**
@@ -248,12 +248,12 @@ class QuizBlock extends Block
      */
     public function showQuestions()
     {
-        $ret      = '';
+        $ret             = '';
         $questionHandler = $helper->getHandler('Question');
         //Fetch all questions in this block
         $criteria = new \Criteria('blockid', $this->getVar('blockid'));
         $criteria->setSort('weight');
-        $questions =  $questionHandler->getObjects($criteria);
+        $questions = $questionHandler->getObjects($criteria);
         if (count($questions) > 0) {
             $ret = '<table>';
             $ret .= "<tr class='head'><td>" . _CR_MA_QUESTION . '</td><td>' . _CR_MA_OPTIONA . '</td><td>' . _CR_MA_OPTIONB . '</td><td>' . _CR_MA_OPTIONC . '</td><td>' . _CR_MA_OPTIOND . '</td><td>' . _CR_MA_WEIGHT . '</td><td>' . _CR_MA_EDIT . '</td><td>' . _CR_MA_DELETE . '</td></tr>';

@@ -25,12 +25,10 @@
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir
 
-
-
 require __DIR__ . '/header.php';
 $blockid = isset($_GET['b']) ? (int)$_GET['b'] : redirect_header('index.php', 2, _CR_ER_NOBLOCKSELECTED);
 
-$helper = Helper::getInstance();
+$helper            = Helper::getInstance();
 $classblockHandler = $helper->getHandler('Classblock');
 $classHandler      = $helper->getHandler('ClassroomClass');
 $classroomHandler  = $helper->getHandler('Classroom');
@@ -60,9 +58,9 @@ $xoopsTpl->assign('classroom', ['classroomid' => $classroom->getVar('classroomid
 
 $bcachetime = $block_arr[0]->block->getVar('bcachetime');
 if (empty($bcachetime)) {
-    $xoopsTpl->caching=0;
+    $xoopsTpl->caching = 0;
 } else {
-    $xoopsTpl->caching=2;
+    $xoopsTpl->caching        = 2;
     $xoopsTpl->cache_lifetime = $bcachetime;
 }
 $btpl = $block_arr[0]->block->getVar('template');
@@ -82,5 +80,5 @@ $xoopsTpl->clear_assign('block');
 $xoopsTpl->assign('block', ['name' => $block_arr[0]->block->getVar('name'), 'content' => $bcontent]);
 unset($bcontent);
 
-$xoopsTpl->caching=0;
+$xoopsTpl->caching = 0;
 require XOOPS_ROOT_PATH . '/footer.php';

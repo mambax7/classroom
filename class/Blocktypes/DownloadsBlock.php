@@ -28,12 +28,11 @@ namespace XoopsModules\Classroom\Blocktypes;
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir                                                      //
 
-use XoopsModules\Classroom\{
-    Block,
+use XoopsModules\Classroom\{Block,
     Helper
 };
-/** @var Helper $helper */
 
+/** @var Helper $helper */
 
 /**
  * DownloadsBlock class

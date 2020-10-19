@@ -29,8 +29,10 @@
 $moduleDirName      = basename(__DIR__);
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-$modversion['name']                = _CR_MI_NAME;
 $modversion['version']             = 1.10;
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2020/07/07';
+$modversion['name']                = _CR_MI_NAME;
 $modversion['description']         = _CR_MI_DESC;
 $modversion['credits']             = 'The XOOPS Project';
 $modversion['help']                = 'classroom.html';
@@ -44,8 +46,6 @@ $moduleDirName                     = basename(__DIR__);
 $modversion['dirname']             = $moduleDirName;
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
-$modversion['module_status']       = 'Beta 1';
-$modversion['release_date']        = '2016/01/18';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '7.1';
@@ -75,20 +75,6 @@ $modversion['tables'] = [
     $moduleDirName . '_' . 'rss',
     $moduleDirName . '_' . 'question',
 ];
-
-// Tables created by sql file (without prefix!)
-//$modversion['tables'][0]  = 'cr_school';
-//$modversion['tables'][1]  = 'cr_division';
-//$modversion['tables'][2]  = 'cr_classroom';
-//$modversion['tables'][3]  = 'cr_block';
-//$modversion['tables'][4]  = 'cr_class';
-//$modversion['tables'][5]  = 'cr_classblock';
-//$modversion['tables'][6]  = 'cr_lessonplan';
-//$modversion['tables'][7]  = 'cr_lessonplanblock';
-//$modversion['tables'][8]  = 'cr_homework';
-//$modversion['tables'][9]  = 'cr_value';
-//$modversion['tables'][10] = 'cr_rss';
-//$modversion['tables'][11] = 'cr_question';
 
 // Admin things
 $modversion['hasAdmin']    = 1;

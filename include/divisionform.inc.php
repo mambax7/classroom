@@ -32,7 +32,7 @@ $dform = new \XoopsThemeForm(_CR_MA_DIVISIONFORM, 'divisionform', $_SERVER['REQU
 
 $dform->addElement(new \XoopsFormText(_CR_MA_DIVISIONNAME, 'name', 30, 50, $edit_division->getVar('name')), true);
 
-$helper = Helper::getInstance();
+$helper        = Helper::getInstance();
 $schoolHandler = $helper->getHandler('School');
 $schools       = $schoolHandler->getObjects();
 

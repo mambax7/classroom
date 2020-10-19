@@ -35,9 +35,9 @@ $xoopsOption['permission']               = 'division';
 $xoopsOption['itemid']                   = $div;
 require __DIR__ . '/header.php';
 
-$helper = Helper::getInstance();
+$helper           = Helper::getInstance();
 $classroomHandler = $helper->getHandler('Classroom');
-$divisionHandler       = $helper->getHandler('Division');
+$divisionHandler  = $helper->getHandler('Division');
 
 $div_criteria = new \Criteria('divisionid', $div);
 $xoopsTpl->assign('classrooms', $classroomHandler->getObjects($div_criteria, false));

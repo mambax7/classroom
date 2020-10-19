@@ -35,7 +35,7 @@ $op                                                       = $_REQUEST['op'] ?? r
 $xoopsConfig['module_cache'][$xoopsModule->getVar('mid')] = 0;
 $gpermHandler                                             = xoops_getHandler('groupperm');
 $groups                                                   = $xoopsUser->getGroups();
-$helper = Helper::getInstance();
+$helper                                                   = Helper::getInstance();
 switch ($op) {
     case 'school':
         if (!$xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
@@ -345,7 +345,7 @@ switch ($op) {
 
             case 'division':
                 $divisionHandler = $helper->getHandler('Division');
-                $thisdiv    =& $divisionHandler->get($_POST['itemid']);
+                $thisdiv         =& $divisionHandler->get($_POST['itemid']);
                 if (!$gpermHandler->checkRight('school', $thisdiv->getVar('schoolid'), $groups, $xoopsModule->getVar('mid'))) {
                     redirect_header('index.php', 2, _NOPERM);
                 }
@@ -361,13 +361,13 @@ switch ($op) {
 
             case 'classroom':
                 $classroomHandler = $helper->getHandler('Classroom');
-                $thiscr    =& $classroomHandler->get($_POST['itemid']);
+                $thiscr           =& $classroomHandler->get($_POST['itemid']);
                 if (!$gpermHandler->checkRight('division', $thiscr->getVar('divisionid'), $groups, $xoopsModule->getVar('mid'))) {
                     redirect_header('index.php', 2, _NOPERM);
                 }
                 if ($classroomHandler->delete($thiscr)) {
                     $divisionHandler = $helper->getHandler('Division');
-                    $thisdiv    =& $divisionHandler->get($thiscr->getVar('divisionid'));
+                    $thisdiv         =& $divisionHandler->get($thiscr->getVar('divisionid'));
                     $thisdiv->updateCache();
                     redirect_header('index.php', 2, _CR_MA_CLASSROOMDELETED);
                 }

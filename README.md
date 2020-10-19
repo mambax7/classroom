@@ -12,8 +12,8 @@
 [![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/classroom.svg?style=flat)](https://github.com/XoopsModules25x/classroom/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/classroom.svg?style=flat)](https://github.com/XoopsModules25x/classroom/releases/)
 
-**Classroom** module for [XOOPS CMS](https://xoops.org)  for managing schools with divisions and classrooms. 
-Each classroom is assigned a user/teacher to manage this classroom. The teacher can then create new classes in that classroom and create blocks of certain built-in types for presenting information..
+**Classroom** module for [XOOPS CMS](https://xoops.org)  for managing schools with divisions and classrooms. Each classroom is assigned a user/teacher to manage this classroom. The teacher can then create new classes in that classroom and create blocks of certain built-in types for presenting
+information..
 
 You can help us with Translations: [![Translations on Transifex](https://xoops.org/images/translations-transifex-blue.svg)](https://www.transifex.com/xoops)
 
