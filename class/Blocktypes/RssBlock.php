@@ -130,6 +130,7 @@ class RssBlock extends Block
      */
     public function updateBlock()
     {
+        $helper             = Helper::getInstance();
         $headlineHandler = $helper->getHandler('Headline');
         $obj             = $headlineHandler->create();
         if (isset($_POST['feedid'])) {
@@ -156,6 +157,7 @@ class RssBlock extends Block
     public function deleteItem()
     {
         $id              = (int)$_REQUEST['id'];
+        $helper             = Helper::getInstance();
         $headlineHandler = $helper->getHandler('Headline');
         $obj             =& $headlineHandler->get($id);
 
@@ -213,6 +215,7 @@ class RssBlock extends Block
     public function getFeed($id)
     {
         $id              = (int)$id;
+        $helper             = Helper::getInstance();
         $headlineHandler = $helper->getHandler('Headline');
 
         return $headlineHandler->get($id);

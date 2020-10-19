@@ -69,7 +69,7 @@ class DownloadsBlock extends Block
 
         $form = new \XoopsThemeForm('', 'linkform', 'manage.php');
         $form->setExtra('enctype="multipart/form-data"');
-        $form->addElement(new \XoopsFormText(_CR_MA_NAME, 'name', 40, 100, htmlspecialchars($link['name'])), true);
+        $form->addElement(new \XoopsFormText(_CR_MA_NAME, 'name', 40, 100, htmlspecialchars($link['name'], ENT_QUOTES | ENT_HTML5)), true);
         if (isset($link['fieldid'])) {
             $form->addElement(new \XoopsFormHidden('file', $link['file']));
             $form->addElement(new \XoopsFormHidden('linkid', $link['fieldid']));
@@ -131,11 +131,11 @@ class DownloadsBlock extends Block
                 (' . $this->getVar('blockid') . ', ' . (int)$_POST['weight'] . ", '" . $myts->addSlashes($_POST['name']) . ';' . $myts->addSlashes($filename) . "')";
 
             return $this->db->query($sql);
-        } else {
-            $this->setErrors('FetchMedia Error: <br>' . $uploader->getErrors());
-
-            return false;
         }
+
+        $this->setErrors('FetchMedia Error: <br>' . $uploader->getErrors());
+
+        return false;
     }
 
     /** Deletes an item in a link block
@@ -231,7 +231,7 @@ class DownloadsBlock extends Block
             $row['file']          = $values[1];
             $ret[$row['fieldid']] = [
                 'linkid' => $row['fieldid'],
-                'name'   => htmlspecialchars($row['name']),
+                'name'   => htmlspecialchars($row['name'], ENT_QUOTES | ENT_HTML5),
                 'file'   => urlencode($row['file']),
                 'weight' => $row['weight'],
             ];

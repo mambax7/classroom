@@ -43,6 +43,9 @@ use XoopsModules\Classroom\{Common\Configurator,
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
 $adminObject->displayNavigation(basename(__FILE__));
 
 echo <<<EOF

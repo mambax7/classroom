@@ -77,7 +77,7 @@ class LessonplanBlock extends Block
                 $currententries .= '<tr><th>' . $day_array[$thisday] . '</th><th>' . _CR_MA_WEIGHT . '</th><th>' . _CR_MA_EDIT . '</th><th>' . _CR_MA_DELETE . '</th></tr>';
                 foreach ($dayentries as $id => $entry) {
                     $class          = isset($class) && 'odd' == $class ? 'even' : 'odd';
-                    $currententries .= "<tr class='" . $class . "'><td>" . htmlspecialchars($entry['value']) . '</td>
+                    $currententries .= "<tr class='" . $class . "'><td>" . htmlspecialchars($entry['value'], ENT_QUOTES | ENT_HTML5) . '</td>
                                                                 <td>' . $entry['weight'] . "</td>
                                                                 <td><a href='manage.php?op=editblock&amp;blockid=" . $this->getVar('blockid') . '&amp;entryid=' . $id . "'>" . _CR_MA_EDIT . "</a></td>
                                                                 <td><a href='manage.php?op=deleteitem&amp;b=" . $this->getVar('blockid') . '&amp;id=' . $id . "'>" . _CR_MA_DELETE . '</a></td></tr>';
@@ -134,7 +134,7 @@ class LessonplanBlock extends Block
             $block['days'][$day]['name'] = $name;
             if (isset($entries[$day]) && count($entries[$day]) > 0) {
                 foreach ($entries[$day] as $id => $entry) {
-                    $block['days'][$day]['entries'][$id] = htmlspecialchars($entry['value']);
+                    $block['days'][$day]['entries'][$id] = htmlspecialchars($entry['value'], ENT_QUOTES | ENT_HTML5);
                     if (!isset($date)) {
                         $date = $entry['date'];
                     }

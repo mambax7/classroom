@@ -89,9 +89,10 @@ class ClassroomClassHandler extends \XoopsPersistableObjectHandler
      * retrieve a {@link ClassroomClass} object
      *
      * @param int|null $id ID of the class
+     * @param null     $blockid
+     * @return mixed
      * @staticvar object reference to the {@link ClassroomClass} object
      *
-     * @return mixed
      */
     public function get($id = null, $blockid = null)
     {
@@ -116,6 +117,7 @@ class ClassroomClassHandler extends \XoopsPersistableObjectHandler
     /**
      * Save class in database
      * @param object $obj reference to the {@link ClassroomClass} object
+     * @param bool   $force
      * @return bool
      */
     public function insert($obj, $force = true)
@@ -142,7 +144,8 @@ class ClassroomClassHandler extends \XoopsPersistableObjectHandler
     /**
      * delete a {@link ClassroomClass} from the database
      *
-     * @param $obj
+     * @param      $obj
+     * @param bool $force
      * @return bool
      */
     public function delete($obj, $force = false)
@@ -164,7 +167,8 @@ class ClassroomClassHandler extends \XoopsPersistableObjectHandler
     public function &getObjects($criteria = null, $as_objects = true, $id_as_key = false)
     {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = $start;
         $sql   = 'SELECT * FROM ' . $this->table;
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
@@ -186,17 +190,17 @@ class ClassroomClassHandler extends \XoopsPersistableObjectHandler
             if ($as_objects) {
                 $class = $this->create(false);
                 $class->assignVars($myrow);
-                if (!$id_as_key) {
-                    $ret[] =& $class;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['classid']] =& $class;
+                } else {
+                    $ret[] =& $class;
                 }
                 unset($class);
             } else {
-                if (!$id_as_key) {
-                    $ret[] = $myrow;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['classid']] = $myrow;
+                } else {
+                    $ret[] = $myrow;
                 }
             }
         }

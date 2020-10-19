@@ -69,8 +69,8 @@ class QuoteBlock extends Block
         }
 
         $form = new \XoopsThemeForm('', 'quoteform', 'manage.php');
-        $form->addElement(new \XoopsFormText(_CR_MA_QUOTE, 'quote', 50, 255, htmlspecialchars($quote['quote'])), true);
-        $form->addElement(new \XoopsFormText(_CR_MA_AUTHOR, 'author', 40, 100, htmlspecialchars($quote['author'])), true);
+        $form->addElement(new \XoopsFormText(_CR_MA_QUOTE, 'quote', 50, 255, htmlspecialchars($quote['quote'], ENT_QUOTES | ENT_HTML5)), true);
+        $form->addElement(new \XoopsFormText(_CR_MA_AUTHOR, 'author', 40, 100, htmlspecialchars($quote['author'], ENT_QUOTES | ENT_HTML5)), true);
         if (isset($quote['fieldid'])) {
             $form->addElement(new \XoopsFormHidden('quoteid', $quote['fieldid']));
         }
@@ -188,8 +188,8 @@ class QuoteBlock extends Block
             $row['author']        = $values[1];
             $ret[$row['fieldid']] = [
                 'quoteid' => $row['fieldid'],
-                'quote'   => htmlspecialchars($row['quote']),
-                'author'  => htmlspecialchars($row['author']),
+                'quote'   => htmlspecialchars($row['quote'], ENT_QUOTES | ENT_HTML5),
+                'author'  => htmlspecialchars($row['author'], ENT_QUOTES | ENT_HTML5),
                 'weight'  => $row['weight'],
             ];
             unset($values);
@@ -222,8 +222,8 @@ class QuoteBlock extends Block
         $random_number = rand(0, ($num_quotes - 1));
         $row           = $quotes[$random_number];
         $values        = explode(';', $row['value']);
-        $row['quote']  = htmlspecialchars($values[0]);
-        $row['author'] = htmlspecialchars($values[1]);
+        $row['quote']  = htmlspecialchars($values[0], ENT_QUOTES | ENT_HTML5);
+        $row['author'] = htmlspecialchars($values[1], ENT_QUOTES | ENT_HTML5);
         $sql           = 'UPDATE ' . $this->table . ' SET updated=' . time() . ' WHERE fieldid=' . $row['fieldid'];
         $this->db->queryF($sql);
 

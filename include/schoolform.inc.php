@@ -49,7 +49,7 @@ $head_select = new \XoopsFormSelect(_CR_MA_HEADOFSCHOOL, 'head', false, $edit_sc
 $head_select->addOptionArray($users);
 $sform->addElement($head_select, true);
 
-$sform->addElement(new \XoopsFormDhtmlTextArea(_CR_MA_DESCRIPTION, 'description', htmlspecialchars($edit_school->getVar('description', 'n')), 35, 50));
+$sform->addElement(new \XoopsFormDhtmlTextArea(_CR_MA_DESCRIPTION, 'description', htmlspecialchars($edit_school->getVar('description', 'n'), ENT_QUOTES | ENT_HTML5), 35, 50));
 
 $moderators = [];
 

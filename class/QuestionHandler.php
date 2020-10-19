@@ -89,9 +89,10 @@ class QuestionHandler extends \XoopsPersistableObjectHandler
      * retrieve a {@link Question} object
      *
      * @param int|null $id ID of the Question
+     * @param null     $fields
+     * @return mixed
      * @staticvar object reference to the {@link Question} object
      *
-     * @return mixed
      */
     public function get($id = null, $fields = null)
     {
@@ -113,6 +114,7 @@ class QuestionHandler extends \XoopsPersistableObjectHandler
     /**
      * Save Question in database
      * @param \XoopsObject $obj reference to the {@link Question} object
+     * @param bool         $force
      * @return bool
      */
     public function insert(\XoopsObject $obj, $force = true)
@@ -140,7 +142,7 @@ class QuestionHandler extends \XoopsPersistableObjectHandler
      * delete a {@link Question} from the database
      *
      * @param \XoopsObject $Question reference to the {@link Question} to delete
-     *
+     * @param bool         $force
      * @return bool
      */
     public function delete(\XoopsObject $Question, $force = false)
@@ -151,8 +153,9 @@ class QuestionHandler extends \XoopsPersistableObjectHandler
     /**
      * delete aall {@link Question} from the database based on criteria
      *
-     * @param \CriteriaElement $criteria reference to the {@link Criteria} object, describing which questions to delete
-     *
+     * @param \CriteriaElement|null $criteria reference to the {@link Criteria} object, describing which questions to delete
+     * @param bool                  $force
+     * @param bool                  $asObject
      * @return bool
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
@@ -163,18 +166,19 @@ class QuestionHandler extends \XoopsPersistableObjectHandler
     /**
      * get {@link Question} objects from criteria
      *
-     * @param \CriteriaElement $criteria   reference to a {@link Criteria} or {@link CriteriaCompo} object
-     * @param bool             $as_objects if true, the returned array will be {@link Question} objects
-     *
+     * @param \CriteriaElement|null $criteria reference to a {@link Criteria} or {@link CriteriaCompo} object
+     * @param bool                  $id_as_key
+     * @param bool                  $as_object
+     * @return array
      * @staticvar array $ret array of {@link Question} objects
      *
-     * @return array
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
         //    public function &getObjects($criteria = null, $as_objects = true)
     {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = $start;
         $sql   = 'SELECT * FROM ' . $this->table . ' q, ' . $this->db->prefix('classroom_value') . ' v WHERE v.fieldid=q.questionid';
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' AND ' . $criteria->render();
@@ -189,7 +193,7 @@ class QuestionHandler extends \XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            if ($as_objects) {
+            if ($as_object) {
                 if (!isset($ret[$myrow['fieldid']])) {
                     $ret[$myrow['fieldid']] = $this->create(false);
                     $ret[$myrow['fieldid']]->assignVar('questionid', $myrow['fieldid']);

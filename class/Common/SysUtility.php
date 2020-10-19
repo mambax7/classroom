@@ -77,7 +77,6 @@ class SysUtility
 
         $select_view   = '';
         $moduleDirName = basename(dirname(__DIR__));
-        /** @var Helper $helper */
         $helper = Helper::getInstance();
 
         //$pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getConfig('modicons16');
@@ -194,7 +193,7 @@ class SysUtility
         // set the auto-incremented id's value to blank.
         unset($tempTable[$id_field]);
         // insert cloned copy of the original  record
-        $sql    = "INSERT INTO $table (" . implode(', ', array_keys($tempTable)) . ") VALUES ('" . implode("', '", array_values($tempTable)) . "')";
+        $sql    = "INSERT INTO $table (" . implode(', ', array_keys($tempTable)) . ") VALUES ('" . implode("', '", $tempTable) . "')";
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         if (!$result) {
             exit($GLOBALS['xoopsDB']->error());
@@ -274,10 +273,10 @@ class SysUtility
                     $truncate .= substr($line_matchings[2], 0, $left + $entities_length);
                     // maximum lenght is reached, so get off the loop
                     break;
-                } else {
-                    $truncate     .= $line_matchings[2];
-                    $total_length += $content_length;
                 }
+
+                $truncate     .= $line_matchings[2];
+                $total_length += $content_length;
                 // if the maximum length is reached, get off the loop
                 if ($total_length >= $length) {
                     break;

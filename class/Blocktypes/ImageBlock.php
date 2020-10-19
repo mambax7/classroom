@@ -69,7 +69,7 @@ class ImageBlock extends Block
         }
 
         $form        = new \XoopsThemeForm('', 'imageform', 'manage.php');
-        $image_input = new \XoopsFormText(_CR_MA_IMAGE, 'image', 60, 255, htmlspecialchars($image['image']));
+        $image_input = new \XoopsFormText(_CR_MA_IMAGE, 'image', 60, 255, htmlspecialchars($image['image'], ENT_QUOTES | ENT_HTML5));
         $image_input->setExtra("><img align='middle' onmouseover='style.cursor=\"hand\"' onclick='javascript:openWithSelfMain(\"" . XOOPS_URL . "/imagemanager.php?nocode=1&amp;target=image\",\"imgmanager\",400,430);' src='" . XOOPS_URL . "/images/image.gif' alt='image' title='image'");
         $form->addElement($image_input, true);
         if (isset($image['fieldid'])) {
@@ -202,7 +202,7 @@ class ImageBlock extends Block
         while (false !== ($row = $this->db->fetchArray($result))) {
             $ret[$row['fieldid']] = [
                 'imageid' => $row['fieldid'],
-                'image'   => htmlspecialchars($row['value']),
+                'image'   => htmlspecialchars($row['value'], ENT_QUOTES | ENT_HTML5),
                 'weight'  => $row['weight'],
             ];
         }

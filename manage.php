@@ -130,7 +130,9 @@ switch ($op) {
 
         $classroomHandler = $helper->getHandler('Classroom');
 
-        if (!$gpermHandler->checkRight($xoopsOption['permission'], $xoopsOption['itemid'], $groups, $xoopsModule->getVar('mid'))) {
+        if ($gpermHandler->checkRight($xoopsOption['permission'], $xoopsOption['itemid'], $groups, $xoopsModule->getVar('mid'))) {
+            $classroomadmin = 1;
+        } else {
             if (!isset($classroom)) {
                 redirect_header('index.php', 2, _NOPERM);
             }
@@ -139,8 +141,6 @@ switch ($op) {
                 redirect_header('index.php', 2, _NOPERM);
             }
             $classroomadmin = 0;
-        } else {
-            $classroomadmin = 1;
         }
         require XOOPS_ROOT_PATH . '/header.php';
 

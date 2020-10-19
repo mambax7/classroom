@@ -98,9 +98,10 @@ class BlockHandler extends \XoopsPersistableObjectHandler
      * retrieve a {@link Block} object
      *
      * @param int|null $id ID of the Block
+     * @param null     $blockid
+     * @return mixed
      * @staticvar object reference to the {@link Block} object
      *
-     * @return mixed
      */
     public function get($id = null, $blockid = null)
     {
@@ -126,6 +127,7 @@ class BlockHandler extends \XoopsPersistableObjectHandler
     /**
      * Save Block in database
      * @param object $obj reference to the {@link Block} object
+     * @param bool   $force
      * @return bool
      */
     public function insert($obj, $force = true)
@@ -153,6 +155,7 @@ class BlockHandler extends \XoopsPersistableObjectHandler
      * delete a {@link Block} from the database
      *
      * @param \XoopsObject $block
+     * @param bool         $force
      * @return bool
      */
     public function delete($block, $force = false)
@@ -178,7 +181,8 @@ class BlockHandler extends \XoopsPersistableObjectHandler
     public function &getObjects($criteria = null, $as_objects = true, $id_as_key = false)
     {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = $start;
         $sql   = 'SELECT * FROM ' . $this->table . ' b';
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
@@ -196,17 +200,17 @@ class BlockHandler extends \XoopsPersistableObjectHandler
             if ($as_objects) {
                 $Block = $this->create(false, $myrow['blocktypeid']);
                 $Block->assignVars($myrow);
-                if (!$id_as_key) {
-                    $ret[] =& $Block;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['blockid']] =& $Block;
+                } else {
+                    $ret[] =& $Block;
                 }
                 unset($Block);
             } else {
-                if (!$id_as_key) {
-                    $ret[] = $myrow;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['blockid']] = $myrow;
+                } else {
+                    $ret[] = $myrow;
                 }
             }
         }

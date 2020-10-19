@@ -195,7 +195,8 @@ class HeadlineHandler
     public function &getObjects($criteria = null)
     {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = $start;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('classroom_rss');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql   .= ' ' . $criteria->renderWhere();

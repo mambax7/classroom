@@ -59,7 +59,8 @@ class HomeworkBlock extends Block
      */
     public function buildForm()
     {
-        $assigned = $due = time();
+        $due      = time();
+        $assigned = $due;
         $text     = '';
 
         $myts           = \MyTextSanitizer::getInstance();
@@ -71,7 +72,7 @@ class HomeworkBlock extends Block
             foreach ($entries as $id => $entry) {
                 $class          = isset($class) && 'odd' == $class ? 'even' : 'odd';
                 $currententries .= "<tr class='" . $class . "'><td>" . formatTimestamp($entry['assigned'], 's', '0') . '
-                                    <td>' . htmlspecialchars($entry['value']) . '</td>
+                                    <td>' . htmlspecialchars($entry['value'], ENT_QUOTES | ENT_HTML5) . '</td>
                                     <td>' . formatTimestamp($entry['due'], 's', '0') . "</td>
                                     <td><a href='manage.php?op=editblock&amp;blockid=" . $this->getVar('blockid') . '&amp;fieldid=' . $id . "'>" . _CR_MA_EDIT . "</a></td>
                                     <td><a href='manage.php?op=deleteitem&amp;b=" . $this->getVar('blockid') . '&amp;id=' . $id . "'>" . _CR_MA_DELETE . '</a></td></tr>';
@@ -113,7 +114,7 @@ class HomeworkBlock extends Block
         $block   = [];
         $entries = $this->getItems();
         foreach ($entries as $key => $entry) {
-            $block['entries'][$key]['value']    = htmlspecialchars($entry['value']);
+            $block['entries'][$key]['value']    = htmlspecialchars($entry['value'], ENT_QUOTES | ENT_HTML5);
             $block['entries'][$key]['assigned'] = formatTimestamp($entry['assigned'], 's', '0');
             $block['entries'][$key]['due']      = formatTimestamp($entry['due'], 's', '0');
         }

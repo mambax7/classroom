@@ -89,9 +89,10 @@ class DivisionHandler extends \XoopsPersistableObjectHandler
      * retrieve a {@link Division} object
      *
      * @param int|null $id ID of the Division
+     * @param null     $blockid
+     * @return mixed
      * @staticvar object reference to the {@link Division} object
      *
-     * @return mixed
      */
     public function get($id = null, $blockid = null)
     {
@@ -112,6 +113,7 @@ class DivisionHandler extends \XoopsPersistableObjectHandler
     /**
      * Save Division in database
      * @param object $obj reference to the {@link Division} object
+     * @param bool   $force
      * @return bool
      */
     public function insert($obj, $force = true)
@@ -139,7 +141,7 @@ class DivisionHandler extends \XoopsPersistableObjectHandler
      * delete a {@link Division} from the database
      *
      * @param \XoopsObject $Division reference to the {@link Division} to delete
-     *
+     * @param bool         $force
      * @return bool
      */
     public function delete($Division, $force = false)
@@ -161,7 +163,8 @@ class DivisionHandler extends \XoopsPersistableObjectHandler
     public function &getObjects($criteria = null, $as_objects = true, $id_as_key = true)
     {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = $start;
         $sql   = 'SELECT d.*, u.name AS directorname FROM ' . $this->table . ' d, ' . $this->db->prefix('users') . ' u WHERE u.uid=d.director';
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' AND ' . $criteria->render();
@@ -183,17 +186,17 @@ class DivisionHandler extends \XoopsPersistableObjectHandler
             if ($as_objects) {
                 $Division = $this->create(false);
                 $Division->assignVars($myrow);
-                if (!$id_as_key) {
-                    $ret[] =& $Division;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['divisionid']] =& $Division;
+                } else {
+                    $ret[] =& $Division;
                 }
                 unset($Division);
             } else {
-                if (!$id_as_key) {
-                    $ret[] = $myrow;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['divisionid']] = $myrow;
+                } else {
+                    $ret[] = $myrow;
                 }
             }
         }
@@ -282,11 +285,11 @@ class DivisionHandler extends \XoopsPersistableObjectHandler
     public function updatePermissions($division)
     {
         global $xoopsModule;
+        $gpermHandler = xoops_getHandler('groupperm');
         if ($division->getVar('divisionid') > 0) {
             $del_criteria = new CriteriaCompo(new \Criteria('gperm_modid', $xoopsModule->getVar('mid')));
             $del_criteria->add(new \Criteria('gperm_name', 'division'));
             $del_criteria->add(new \Criteria('gperm_itemid', $division->getVar('divisionid')));
-            $gpermHandler = xoops_getHandler('groupperm');
             $gpermHandler->deleteAll($del_criteria);
         }
         foreach ($_POST['moderators'] as $groupid) {

@@ -23,7 +23,7 @@
     </script>
 </head>
 <body>
-<center>
+<div style="text-align: center;">
     <div style='width: 600px; text-align: left; border: none; padding: 6px; font-family: Tahoma, Verdana, sans-serif; font-size: 10px; '>
         <{foreach item=result from=$results}>
             <div class="<{cycle values='odd, even'}>">
@@ -53,6 +53,6 @@
             <{$smarty.const._CR_MA_PERCENTAGE}>: <{$percentage}> %
         </div>
     </div>
-</center>
+</div>
 </body>
 </html>

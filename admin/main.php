@@ -24,7 +24,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir                                                      //
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
 echo "<h4><a href='" . XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $xoopsModule->getVar('mid') . "'>" . _PREFERENCES . '</a></h4>';

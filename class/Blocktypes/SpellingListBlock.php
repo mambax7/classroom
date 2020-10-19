@@ -64,8 +64,8 @@ class SpellingListBlock extends Block
         $item = isset($_GET['id']) ? $this->getItem($_GET['id']) : $item = ['word' => '', 'description' => '', 'weight' => 0];
 
         $form = new \XoopsThemeForm('', 'spellingform', 'manage.php');
-        $form->addElement(new \XoopsFormText(_CR_MA_WORD, 'word', 40, 50, htmlspecialchars($item['word'])), true);
-        $form->addElement(new \XoopsFormDhtmlTextArea(_CR_MA_DESCRIPTION, 'description', htmlspecialchars($item['description']), 10, 40), true);
+        $form->addElement(new \XoopsFormText(_CR_MA_WORD, 'word', 40, 50, htmlspecialchars($item['word'], ENT_QUOTES | ENT_HTML5)), true);
+        $form->addElement(new \XoopsFormDhtmlTextArea(_CR_MA_DESCRIPTION, 'description', htmlspecialchars($item['description'], ENT_QUOTES | ENT_HTML5), 10, 40), true);
         $form->addElement(new \XoopsFormText(_CR_MA_WEIGHT, 'weight', 10, 10, (int)$item['weight']));
         if (isset($item['fieldid'])) {
             $form->addElement(new \XoopsFormHidden('id', $item['fieldid']));
@@ -118,7 +118,7 @@ class SpellingListBlock extends Block
         global $xoopsTpl;
         $myts                = \MyTextSanitizer::getInstance();
         $item                = $this->getItem($_GET['id']);
-        $item['word']        = htmlspecialchars($item['word']);
+        $item['word']        = htmlspecialchars($item['word'], ENT_QUOTES | ENT_HTML5);
         $item['description'] = $myts->displayTarea($item['description'], 1);
         $xoopsTpl->assign('item', $item);
         $xoopsTpl->display('db:cr_blocktype_spelling_details.tpl');
@@ -210,7 +210,7 @@ class SpellingListBlock extends Block
             $row['description']   = $values[1];
             $ret[$row['fieldid']] = [
                 'id'          => $row['fieldid'],
-                'word'        => htmlspecialchars($row['word']),
+                'word'        => htmlspecialchars($row['word'], ENT_QUOTES | ENT_HTML5),
                 'description' => $myts->displayTarea($row['description'], 1),
                 'weight'      => $row['weight'],
             ];

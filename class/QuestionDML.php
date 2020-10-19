@@ -94,7 +94,10 @@ class QuestionDML
         }
         $obj->setVar('questionid', $this->db->getInsertId());
 
-        $optiona = $optionb = $optionc = $optiond = 0;
+        $optiond = 0;
+        $optionc = $optiond;
+        $optionb = $optionc;
+        $optiona = $optionb;
 
         $correct_option    = $obj->getVar('correct');
         ${$correct_option} = 1;
@@ -150,7 +153,10 @@ class QuestionDML
 
             return false;
         }
-        $optiona = $optionb = $optionc = $optiond = 0;
+        $optiond = 0;
+        $optionc = $optiond;
+        $optionb = $optionc;
+        $optiona = $optionb;
 
         $correct_option    = $obj->getVar('correct');
         ${$correct_option} = 1;

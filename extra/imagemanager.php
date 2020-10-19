@@ -41,10 +41,10 @@ if (isset($_POST)) {
         ${$k} = $v;
     }
 }
-if (!$xoopsUser) {
-    $group = [XOOPS_GROUP_ANONYMOUS];
-} else {
+if ($xoopsUser) {
     $group =& $xoopsUser->getGroups();
+} else {
+    $group = [XOOPS_GROUP_ANONYMOUS];
 }
 if ('list' == $op) {
     require_once XOOPS_ROOT_PATH . '/class/template.php';
@@ -63,7 +63,7 @@ if ('list' == $op) {
     if ($catcount > 0) {
         $xoopsTpl->assign('lang_go', _GO);
         $catshow = !isset($_GET['cat_id']) ? 0 : (int)$_GET['cat_id'];
-        $catshow = (!empty($catshow) && in_array($catshow, array_keys($catlist))) ? $catshow : 0;
+        $catshow = (!empty($catshow) && array_key_exists($catshow, $catlist)) ? $catshow : 0;
         $xoopsTpl->assign('show_cat', $catshow);
         if ($catshow > 0) {
             $xoopsTpl->assign('lang_addimage', _ADDIMAGE);
@@ -106,7 +106,9 @@ if ('list' == $op) {
                     if ('db' == $storetype) {
                         $src = XOOPS_URL . '/image.php?id=' . $images[$i]->getVar('image_id');
                         if ($nocode) {
-                            $lcode = $code = $rcode = $src;
+                            $rcode = $src;
+                            $code  = $rcode;
+                            $lcode = $code;
                         } else {
                             $lcode = '[img align=left id=' . $images[$i]->getVar('image_id') . ']' . $images[$i]->getVar('image_nicename') . '[/img]';
                             $code  = '[img id=' . $images[$i]->getVar('image_id') . ']' . $images[$i]->getVar('image_nicename') . '[/img]';
@@ -115,7 +117,9 @@ if ('list' == $op) {
                     } else {
                         $src = XOOPS_UPLOAD_URL . '/' . $images[$i]->getVar('image_name');
                         if ($nocode) {
-                            $lcode = $code = $rcode = $src;
+                            $rcode = $src;
+                            $code  = $rcode;
+                            $lcode = $code;
                         } else {
                             $lcode = '[img align=left]' . XOOPS_UPLOAD_URL . '/' . $images[$i]->getVar('image_name') . '[/img]';
                             $code  = '[img]' . XOOPS_UPLOAD_URL . '/' . $images[$i]->getVar('image_name') . '[/img]';
@@ -148,9 +152,7 @@ if ('upload' == $op) {
     $imgcat_id     = (int)$_GET['imgcat_id'];
     $imgcat        =& $imgcatHandler->get($imgcat_id);
     $error         = false;
-    if (!is_object($imgcat)) {
-        $error = true;
-    } else {
+    if (is_object($imgcat)) {
         $imgcatpermHandler = xoops_getHandler('groupperm');
         if ($xoopsUser) {
             if (!$imgcatpermHandler->checkRight('imgcat_write', $imgcat_id, $xoopsUser->getGroups())) {
@@ -161,6 +163,8 @@ if ('upload' == $op) {
                 $error = true;
             }
         }
+    } else {
+        $error = true;
     }
     if (false !== $error) {
         xoops_header(false);
@@ -200,9 +204,7 @@ if ('doupload' == $op) {
     $imgcatHandler = xoops_getHandler('imagecategory');
     $imgcat        =& $imgcatHandler->get((int)$imgcat_id);
     $error         = false;
-    if (!is_object($imgcat)) {
-        $error = true;
-    } else {
+    if (is_object($imgcat)) {
         $imgcatpermHandler = xoops_getHandler('groupperm');
         if ($xoopsUser) {
             if (!$imgcatpermHandler->checkRight('imgcat_write', $imgcat_id, $xoopsUser->getGroups())) {
@@ -213,6 +215,8 @@ if ('doupload' == $op) {
                 $error = true;
             }
         }
+    } else {
+        $error = true;
     }
     if (false !== $error) {
         xoops_header(false);
@@ -223,9 +227,7 @@ if ('doupload' == $op) {
     $uploader = new \XoopsMediaUploader(XOOPS_UPLOAD_PATH, ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'], $imgcat->getVar('imgcat_maxsize'), $imgcat->getVar('imgcat_maxwidth'), $imgcat->getVar('imgcat_maxheight'));
     $uploader->setPrefix('img');
     if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
-        if (!$uploader->upload()) {
-            $err = $uploader->getErrors();
-        } else {
+        if ($uploader->upload()) {
             $imageHandler = xoops_getHandler('image');
             $image        = $imageHandler->create();
             $image->setVar('image_name', $uploader->getSavedFileName());
@@ -245,6 +247,8 @@ if ('doupload' == $op) {
             if (!$imageHandler->insert($image)) {
                 $err = sprintf(_FAILSAVEIMG, $image->getVar('image_nicename'));
             }
+        } else {
+            $err = $uploader->getErrors();
         }
     } else {
         $err = _FAILFETCHIMG;

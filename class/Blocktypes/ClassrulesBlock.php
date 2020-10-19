@@ -42,7 +42,7 @@ class ClassrulesBlock extends Block
         }
 
         $form = new \XoopsThemeForm('', 'ruleform', 'manage.php');
-        $form->addElement(new \XoopsFormDhtmlTextArea(_CR_MA_RULE, 'value', htmlspecialchars($rule['value']), 10, 40), true);
+        $form->addElement(new \XoopsFormDhtmlTextArea(_CR_MA_RULE, 'value', htmlspecialchars($rule['value'], ENT_QUOTES | ENT_HTML5), 10, 40), true);
         $form->addElement(new \XoopsFormText(_CR_MA_WEIGHT, 'weight', 5, 5, (int)$rule['weight']));
         if (isset($rule['value'])) {
             $form->addElement(new \XoopsFormHidden('ruleid', $rule['value']));

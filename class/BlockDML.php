@@ -59,7 +59,7 @@ class BlockDML
     /**
      * Constructor sets up {@link BlockDML} object
      * @param \XoopsDatabase $db to {@link Database} object
-     * @param                $table
+     * @param string         $table
      */
     public function __construct(\XoopsDatabase $db, $table)
     {

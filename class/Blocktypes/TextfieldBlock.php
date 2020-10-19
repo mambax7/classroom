@@ -57,7 +57,7 @@ class TextfieldBlock extends Block
     public function buildForm()
     {
         $myts    = \MyTextSanitizer::getInstance();
-        $text    = htmlspecialchars($this->getTextfield());
+        $text    = htmlspecialchars($this->getTextfield(), ENT_QUOTES | ENT_HTML5);
         $is_edit = ('' != $text) ? 1 : 0;
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         $form = new \XoopsThemeForm('', 'textfieldform', 'manage.php');

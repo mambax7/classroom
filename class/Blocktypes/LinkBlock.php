@@ -68,8 +68,8 @@ class LinkBlock extends Block
         }
 
         $form = new \XoopsThemeForm('', 'linkform', 'manage.php');
-        $form->addElement(new \XoopsFormText(_CR_MA_LINK, 'link', 40, 100, htmlspecialchars($link['link'])), true);
-        $form->addElement(new \XoopsFormText(_CR_MA_URL, 'url', 40, 100, htmlspecialchars($link['url'])), true);
+        $form->addElement(new \XoopsFormText(_CR_MA_LINK, 'link', 40, 100, htmlspecialchars($link['link'], ENT_QUOTES | ENT_HTML5)), true);
+        $form->addElement(new \XoopsFormText(_CR_MA_URL, 'url', 40, 100, htmlspecialchars($link['url'], ENT_QUOTES | ENT_HTML5)), true);
         $form->addElement(new \XoopsFormText(_CR_MA_WEIGHT, 'weight', 10, 10, (int)$link['weight']));
         if (isset($link['fieldid'])) {
             $form->addElement(new \XoopsFormHidden('linkid', $link['fieldid']));
@@ -196,7 +196,7 @@ class LinkBlock extends Block
             $row['url']           = $values[1];
             $ret[$row['fieldid']] = [
                 'linkid' => $row['fieldid'],
-                'link'   => htmlspecialchars($row['link']),
+                'link'   => htmlspecialchars($row['link'], ENT_QUOTES | ENT_HTML5),
                 'url'    => $row['url'],
                 'weight' => $row['weight'],
             ];

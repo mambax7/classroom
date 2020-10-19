@@ -126,6 +126,7 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
     /**
      * Save Classblock in database
      * @param object $obj reference to the {@link Classblock} object
+     * @param bool   $force
      * @return bool
      */
     public function insert($obj, $force = true)
@@ -140,10 +141,8 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
             if (!$this->dml->insertClassblock($obj)) {
                 return false;
             }
-        } else {
-            if (!$this->dml->updateClassblock($obj)) {
-                return false;
-            }
+        } elseif (!$this->dml->updateClassblock($obj)) {
+            return false;
         }
 
         return true;
@@ -152,7 +151,8 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
     /**
      * delete a {@link Classblock} from the database
      *
-     * @param $block
+     * @param      $block
+     * @param bool $force
      * @return bool
      */
     public function delete($block, $force = false)
@@ -185,19 +185,21 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
     /**
      * get {@link Classblock} objects from criteria
      *
-     * @param \CriteriaElement $criteria  reference to a {@link Criteria} or {@link CriteriaCompo} object
-     * @param bool             $as_object if true, the returned array will be {@link Classblock} objects
-     *
-     * @staticvar array $ret array of {@link Classblock} objects
+     * @param null $criteria  reference to a {@link Criteria} or {@link CriteriaCompo} object
+     * @param bool $id_as_key
+     * @param bool $as_object if true, the returned array will be {@link Classblock} objects
      *
      * @return array
+     * @staticvar array $ret array of {@link Classblock} objects
+     *
      */
 
     public function &getObjects($criteria = null, $id_as_key = false, $as_object = true)
     {
         $helper = Helper::getInstance();
         $ret    = [];
-        $limit  = $start = 0;
+        $start  = 0;
+        $limit  = $start;
         $sql    = 'SELECT cb.blockid, cb.classid, cb.visible, cb.side, cb.weight, b.blocktypeid, b.classroomid, b.name AS blockname
                 FROM ' . $this->table . ' cb,
                      ' . $this->db->prefix('classroom_block') . ' b
@@ -246,6 +248,7 @@ class ClassblockHandler extends \XoopsPersistableObjectHandler
      */
     public function updateInsert(&$block)
     {
+        $helper = Helper::getInstance();
         $classHandler = $helper->getHandler('ClassroomClass');
         if ('' == $_POST['blockname']) {
             $this->setErrors('Block Name not set');

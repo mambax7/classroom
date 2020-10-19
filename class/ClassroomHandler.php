@@ -89,9 +89,10 @@ class ClassroomHandler extends \XoopsPersistableObjectHandler
      * retrieve a {@link ClassroomBase} object
      *
      * @param int|null $id ID of the classroom
+     * @param null     $blockid
+     * @return mixed
      * @staticvar object reference to the {@link ClassroomBase} object
      *
-     * @return mixed
      */
     public function get($id = null, $blockid = null)
     {
@@ -112,6 +113,7 @@ class ClassroomHandler extends \XoopsPersistableObjectHandler
     /**
      * Save classroom in database
      * @param object $obj reference to the {@link ClassroomBase} object
+     * @param bool   $force
      * @return bool
      */
     public function insert($obj, $force = true)
@@ -139,7 +141,7 @@ class ClassroomHandler extends \XoopsPersistableObjectHandler
      * delete a {@link ClassroomBase} from the database
      *
      * @param object $classroom reference to the {@link ClassroomBase} to delete
-     *
+     * @param bool   $force
      * @return bool
      */
     public function delete($classroom, $force = false)
@@ -161,7 +163,8 @@ class ClassroomHandler extends \XoopsPersistableObjectHandler
     public function &getObjects($criteria = null, $as_objects = true, $id_as_key = false)
     {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = $start;
         $sql   = 'SELECT c.*, u.name AS ownername FROM ' . $this->table . ' c, ' . $this->db->prefix('users') . ' u WHERE u.uid=c.owner';
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' AND ' . $criteria->render();
@@ -183,17 +186,17 @@ class ClassroomHandler extends \XoopsPersistableObjectHandler
             if ($as_objects) {
                 $classroom = $this->create(false);
                 $classroom->assignVars($myrow);
-                if (!$id_as_key) {
-                    $ret[] =& $classroom;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['classroomid']] =& $classroom;
+                } else {
+                    $ret[] =& $classroom;
                 }
                 unset($classroom);
             } else {
-                if (!$id_as_key) {
-                    $ret[] = $myrow;
-                } else {
+                if ($id_as_key) {
                     $ret[$myrow['classroomid']] = $myrow;
+                } else {
+                    $ret[] = $myrow;
                 }
             }
         }
@@ -269,11 +272,11 @@ class ClassroomHandler extends \XoopsPersistableObjectHandler
     public function updatePermissions($obj)
     {
         global $xoopsModule;
+        $gpermHandler = xoops_getHandler('groupperm');
         if ($obj->getVar('classroomid') > 0) {
             $del_criteria = new CriteriaCompo(new \Criteria('gperm_modid', $xoopsModule->getVar('mid')));
             $del_criteria->add(new \Criteria('gperm_name', 'classroom'));
             $del_criteria->add(new \Criteria('gperm_itemid', $obj->getVar('classroomid')));
-            $gpermHandler = xoops_getHandler('groupperm');
             $gpermHandler->deleteAll($del_criteria);
         }
         foreach ($_POST['moderators'] as $groupid) {

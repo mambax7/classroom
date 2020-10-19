@@ -60,14 +60,14 @@ class Block extends \XoopsObject
         $this->db    = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix('classroom_value');
 
-        $this->initVar('blockid', XOBJ_DTYPE_INT);
-        $this->initVar('classroomid', XOBJ_DTYPE_INT);
-        $this->initVar('name', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('blocktypeid', XOBJ_DTYPE_INT);
+        $this->initVar('blockid', \XOBJ_DTYPE_INT);
+        $this->initVar('classroomid', \XOBJ_DTYPE_INT);
+        $this->initVar('name', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('blocktypeid', \XOBJ_DTYPE_INT);
 
-        $this->initVar('template', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('blocktypename', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('bcachetime', XOBJ_DTYPE_INT);
+        $this->initVar('template', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('blocktypename', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('bcachetime', \XOBJ_DTYPE_INT);
     }
 
     /**

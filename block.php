@@ -25,6 +25,10 @@
 //  ------------------------------------------------------------------------ //
 //  Author:  Mithrandir
 
+use XoopsModules\Classroom\{Helper
+};
+/** @var Helper $helper */
+
 require __DIR__ . '/header.php';
 $blockid = isset($_GET['b']) ? (int)$_GET['b'] : redirect_header('index.php', 2, _CR_ER_NOBLOCKSELECTED);
 

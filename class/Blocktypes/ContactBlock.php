@@ -181,6 +181,7 @@ class ContactBlock extends Block
     {
         global $xoopsTpl, $xoopsUser, $xoopsConfig, $xoopsOption;
         $myts = \MyTextSanitizer::getInstance();
+        $helper = Helper::getInstance();
 
         $classroomHandler = $helper->getHandler('Classroom');
         $classroom        =& $classroomHandler->get($this->getVar('classroomid'));
