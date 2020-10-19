@@ -1,0 +1,14 @@
+-
+    classid: '1'
+    classroomid: '1'
+    name: English
+    time: '12'
+    description: 'nst-nst -nt-nt-nst -nsts -n'
+    weight: '0'
+-
+    classid: '2'
+    classroomid: '2'
+    name: 'Physics Class'
+    time: '12 Noon'
+    description: 'thsnth snthsnth snthsnths nth snthnsth'
+    weight: '1'

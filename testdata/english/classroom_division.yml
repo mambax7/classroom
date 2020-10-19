@@ -1,0 +1,16 @@
+-
+    divisionid: '1'
+    schoolid: '1'
+    name: 'Elementary School'
+    description: 'thdnth nthdnthd nthdnthd'
+    director: '1'
+    location: London
+    weight: '0'
+-
+    divisionid: '2'
+    schoolid: '2'
+    name: 'High School'
+    description: 'snth snth snth snth tnsh'
+    director: '1'
+    location: 'New York'
+    weight: '2'

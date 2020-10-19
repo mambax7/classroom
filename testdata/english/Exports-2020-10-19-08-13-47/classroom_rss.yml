@@ -1,0 +1,14 @@
+-
+    headline_id: '1'
+    headline_name: XOOPS
+    headline_url: 'http://xoops.org'
+    headline_rssurl: 'http://xoops.org/backend.php'
+    headline_encoding: utf-8
+    headline_cachetime: '86400'
+    headline_display: '1'
+    headline_weight: '2'
+    headline_blockmax: '10'
+    headline_xml: ''
+    headline_updated: '1603026900'
+    headline_blockid: '9'
+    headline_titlelength: '25'

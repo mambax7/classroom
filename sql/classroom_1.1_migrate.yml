@@ -1,0 +1,279 @@
+classroom_school:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: schoolid
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: name
+            attributes: ' varchar(100)  NOT NULL  DEFAULT '''' '
+        -
+            name: location
+            attributes: ' varchar(255) '
+        -
+            name: head
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: description
+            attributes: ' text '
+        -
+            name: weight
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: schoolid
+            unique: true
+classroom_division:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: divisionid
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: schoolid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' varchar(100)  NOT NULL  DEFAULT '''' '
+        -
+            name: description
+            attributes: ' text '
+        -
+            name: director
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''1'' '
+        -
+            name: location
+            attributes: ' varchar(255) '
+        -
+            name: weight
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: divisionid
+            unique: true
+classroom_classroom:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: classroomid
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: divisionid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' varchar(100)  NOT NULL  DEFAULT '''' '
+        -
+            name: owner
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: description
+            attributes: ' text '
+        -
+            name: location
+            attributes: ' varchar(255) '
+        -
+            name: weight
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: classroomid
+            unique: true
+classroom_block:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: blockid
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: classroomid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' varchar(50)  NOT NULL  DEFAULT '''' '
+        -
+            name: blocktypeid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: blockid
+            unique: true
+classroom_class:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: classid
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: classroomid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' varchar(100)  NOT NULL  DEFAULT '''' '
+        -
+            name: time
+            attributes: ' varchar(255) '
+        -
+            name: description
+            attributes: ' text '
+        -
+            name: weight
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: classid
+            unique: true
+classroom_classblock:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: classid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: blockid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: side
+            attributes: ' tinyint(2) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: weight
+            attributes: ' mediumint(4)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: visible
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: 'classid, blockid'
+            unique: true
+classroom_lessonplan:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: entryid
+            attributes: ' int(12) unsigned  NOT NULL '
+        -
+            name: blockid
+            attributes: ' int(12) unsigned  NOT NULL '
+        -
+            name: day
+            attributes: ' tinyint(2) unsigned  NOT NULL  DEFAULT ''1'' '
+    keys:
+        PRIMARY:
+            columns: entryid
+            unique: true
+classroom_lessonplanblock:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: blockid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date
+            attributes: ' int(12) unsigned  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: blockid
+            unique: true
+classroom_homework:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: fieldid
+            attributes: ' int(12) unsigned  NOT NULL '
+        -
+            name: assigned
+            attributes: ' int(12) unsigned  NOT NULL '
+        -
+            name: due
+            attributes: ' int(12) unsigned  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: fieldid
+            unique: true
+classroom_value:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: fieldid
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: blockid
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: value
+            attributes: ' text  NOT NULL '
+        -
+            name: weight
+            attributes: ' tinyint(4) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: updated
+            attributes: ' int(12) unsigned  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: fieldid
+            unique: true
+classroom_rss:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: headline_id
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: headline_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: headline_url
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: headline_rssurl
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: headline_encoding
+            attributes: ' varchar(15)  NOT NULL  DEFAULT '''' '
+        -
+            name: headline_cachetime
+            attributes: ' mediumint(8) unsigned  NOT NULL  DEFAULT ''3600'' '
+        -
+            name: headline_display
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: headline_weight
+            attributes: ' smallint(3) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: headline_blockmax
+            attributes: ' tinyint(2) unsigned  NOT NULL  DEFAULT ''10'' '
+        -
+            name: headline_xml
+            attributes: ' text  NOT NULL '
+        -
+            name: headline_updated
+            attributes: ' int(10)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: headline_blockid
+            attributes: ' int(12)  NOT NULL '
+        -
+            name: headline_titlelength
+            attributes: ' int(4)  NOT NULL  DEFAULT ''25'' '
+    keys:
+        PRIMARY:
+            columns: headline_id
+            unique: true
+classroom_question:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: questionid
+            attributes: ' int(12) unsigned  NOT NULL '
+        -
+            name: optionno
+            attributes: ' varchar(15)  NOT NULL  DEFAULT ''optiona'' '
+        -
+            name: optvalue
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: correct
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: 'questionid, optionno'
+            unique: true

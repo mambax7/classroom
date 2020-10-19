@@ -1,0 +1,20 @@
+-
+    questionid: '12'
+    optionno: optiona
+    optvalue: Shanghai
+    correct: '0'
+-
+    questionid: '12'
+    optionno: optionb
+    optvalue: London
+    correct: '0'
+-
+    questionid: '12'
+    optionno: optionc
+    optvalue: Tokyo
+    correct: '1'
+-
+    questionid: '12'
+    optionno: optiond
+    optvalue: Paris
+    correct: '0'
